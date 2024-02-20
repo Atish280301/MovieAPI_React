@@ -5,10 +5,9 @@ import './App.css';
 
 function App() {
   const [movies, SetMovies] = useState([])
-  const FetchMovies = () => {
-    fetch('https://swapi.dev/api/films/').then(resposne => {
-      return resposne.json();
-    }).then(data => {
+  const FetchMovies = async () => {
+    const response = await fetch('https://swapi.dev/api/films/')
+    const data = await response.json();
       const transformedMovies = data.results.map(moviedata => {
         return {
           id: moviedata.episode_id,
@@ -18,7 +17,6 @@ function App() {
         };
       });
       SetMovies(transformedMovies);
-    });
   }
   return (
     <React.Fragment>
